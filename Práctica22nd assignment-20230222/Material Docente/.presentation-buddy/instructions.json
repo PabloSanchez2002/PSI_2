@@ -1,0 +1,271 @@
+// install presentation buddy extesion
+// in vscode and place this file
+// in a directory called .presentation-buddy
+//  in the project root directory
+// place the file vue_1,html with the initial code
+
+// assign projection buddy:continue to key [backquote]
+// crtl-shift-p and type presentation buddy:start
+// https://v2.vuejs.org/v2/guide/#
+// settings, html, disablea utoclossing quotes and tags
+[
+  // (1) load base file
+  {
+    "type": "openFile",
+    "path": "./vue_1.html"
+  },
+  {
+    "type": "wait",
+    "delay": "manual",
+    "save": true
+  },
+  // (2) import vue module
+  {
+    "type": "goto",
+    "line": 4,
+    "column": 1
+  },
+  {
+    "type": "typeTextFromFile",
+    "path": "./vue_2"
+  },
+  {
+    "type": "wait",
+    "delay": "manual",
+    "save": true
+  },
+  // (3) create vue instance
+  {
+    "type": "goto",
+    "line": 13,
+    "column": 1
+  },
+  {
+    "type": "typeTextFromFile",
+    "path": "./vue_3"
+  },
+  {
+    "type": "wait",
+    "delay": "manual",
+    "save": true
+  },
+  // 4) use variable producst
+  {
+    "type": "goto",
+    "line": 9,
+    "column": 1
+  },
+  {
+    "type": "select",
+    "line": 9,
+    "column": 8
+  },
+  {
+    "type": "typeText",
+    "text": ["      {{ product }}" ]
+  },
+  {
+    "type": "wait",
+    "delay": "manual",
+    "save": true
+  },
+  // (5) change value of product using vue-dev in hrome 
+  {
+    "type": "goto",
+    "line": 26,
+    "column": 1
+  },
+  {
+    "type": "typeText",
+    "text": ["<!--Change value in vue dev tools-->"]
+  },
+  {
+    "type": "wait",
+    "delay": "manual",
+    "save": true
+  },
+
+  //6) list of products and for loop
+  {
+    "type": "goto",
+    "line": 17,
+    "column": 1
+  },
+  {
+    "type": "select",
+    "line": 17,
+    "column": 28
+  },
+  {
+    "type": "typeText",
+    "text": ["                   products:['Boots',", 
+       "                            'Jackets',",
+       "                             'Hiking Socks'",
+       "                   ]"
+    ]
+  },
+  {
+    "type": "goto",
+    "line": 9,
+    "column": 1
+  },
+  {
+    "type": "select",
+    "line": 9,
+    "column": 39
+  },
+  {
+    "type": "typeText",
+    "text": [
+      "        <ul>",
+      "          <li v-for='product in products'>",
+      "              {{ product }} ",
+      "          </li>",
+      "        </ul>"
+    ]
+  },
+  {
+    "type": "wait",
+    "delay": "manual",
+    "save": true
+  },
+  // 7) fetch from api
+  // 7a delete array//21:30 24:13
+  {
+    "type": "goto",
+    "line": 21,
+    "column": 1
+  },
+  {
+    "type": "select",
+    "line": 24,
+    "column": 21
+  },
+  {
+    "type": "typeText",
+    "text": ["               products: []"]
+  },
+  //{
+  //  "type": "wait",
+  //  "delay": "manual",
+  //  "save": true
+  //},
+  //7b add fetch 23, 14
+  {
+    "type": "goto",
+    "line": 23,
+    "column": 14
+  },
+  {
+    "type": "typeTextFromFile",
+    "path": "./vue_4"
+  },
+  {
+    "type": "wait",
+    "delay": "manual",
+    "save": true
+  },
+  // 8 show products better
+  {
+    "type": "goto",
+    "line": 11,
+    "column": 25
+  },
+  {
+    "type": "typeText",
+    "text": [".quantity }} {{ product.name "]
+  },
+  {
+    "type": "wait",
+    "delay": "manual",
+    "save": true
+  },
+  // 9) if out of stock
+  {
+    "type": "goto",
+    "line": 11,
+    "column": 57
+  },
+  {
+    "type": "typeText",
+    "text": ["",
+            "           <span v-if='product.quantity == 0'>",
+            "              - OUT of stock",
+            "           </span>"
+    ]
+  },
+  {
+    "type": "wait",
+    "delay": "manual",
+    "save": true
+  },
+  //10) total number of products
+  {
+    "type": "goto",
+    "line": 17,
+    "column": 1
+  },
+  {
+    "type": "typeText",
+    "text": ["       <h2> Total Inventory: {{ totalProducts}} </h2>"]
+  },
+  {
+    "type": "goto",
+    "line": 34,
+    "column": 13
+  },
+  {
+    "type": "typeText",
+    "text": [",",
+            "      computed:{",
+            "               totalProducts(){",
+            "               return this.products.reduce((total, product) => {",
+            "                     return total + parseInt(product.quantity)",
+            "               }, 0);",
+            "        }",
+            "      }"
+          ]
+  },
+  {
+    "type": "wait",
+    "delay": "manual",
+    "save": true
+  },
+  //11) add button increase by 1
+  {
+    "type": "goto",
+    "line": 15,
+    "column": 1
+  },
+  {
+    "type": "typeText",
+    "text": ["                <button @click='product.quantity = Number(product.quantity) + 1'> Add </button>"
+             ]
+  },
+  {
+    "type": "wait",
+    "delay": "manual",
+    "save": true
+  },
+  //  12) input field bindded to quantity
+  {
+    "type": "goto",
+    "line": 11,
+    "column": 1
+  },
+  {
+    "type": "typeTextFromFile",
+    "path": "./vue_5"
+  }
+]
+
+/*
+axios.get(`/json/secciones`+ tienda +`.json`)
+      .then(response => {this.userInfo = response.data.map(item=>{
+                                     item.sale_potential=Number(item.sale_potential)
+                                          return item;
+                                      });
+
+})
+      .catch(e => {this.errors.push(e);});
+*/

@@ -1,0 +1,16 @@
+1) load vue_1.html (basic html file) [show it in  google-chrome]
+2) import module
+3) create vue instance
+4) use variable product
+5) change value of product using vue-dev in hrome
+
+6) list of products and for loop
+7) fetch from api -> create api in https://jsonplaceholder.typicode.com/
+8) show products better
+9) if out of stock
+10) total number of products
+11) add button increase by 1
+12) input field bindded to quantity
+
+13) mention split in components
+// https://v2.vuejs.org/v2/guide/#

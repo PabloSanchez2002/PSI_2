@@ -1,0 +1,9 @@
+
+      created () {
+        fetch('https://my-json-server.typicode.com/rmarabini/products/products')
+        .then(response => response.json())
+        .then(json => {
+          this.products = json;
+        })
+        .catch(err => console.log('Request Failed', err));
+      }

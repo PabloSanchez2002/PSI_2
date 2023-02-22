@@ -1,0 +1,11 @@
+    <script> // app =  new Vue -> version 2
+      const app = Vue.createApp({
+        data() {
+          return {
+            product:'Boots' 
+            }
+         },
+       });
+  
+      app.mount('#app');
+    </script>
