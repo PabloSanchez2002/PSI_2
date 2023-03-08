@@ -26,47 +26,77 @@ export default {
   name: "app",
   components: {
     TablaPersonas,
-    FormularioPersona, // <<<<<<
+    FormularioPersona,
   },
   data() {
     return {
-      personas: [
-        {
-          id: 1,
-          nombre: "Jon",
-          apellido: "Nieve",
-          email: "jon@email.com",
-        },
-        {
-          id: 2,
-          nombre: "Tyrion",
-          apellido: "Lannister",
-          email: "tyrion@email.com",
-        },
-        {
-          id: 3,
-          nombre: "Daenerys",
-          apellido: "Targaryen",
-          email: "daenerys@email.com",
-        },
-      ],
+      personas: [],
     };
   },
   methods: {
-    agregarPersona(persona) {
-      let id = 0;
-      if (this.personas.length > 0) {
-        id = this.personas[this.personas.length - 1].id + 1;
+    async listadoPersonas() {
+      try {
+        const response = await fetch(
+          "https://my-json-server.typicode.com/ rmarabini/people/personas/"
+        );
+        this.personas = await response.json();
+      } catch (error) {
+        console.error(error);
       }
-      this.personas = [...this.personas, { ...persona, id }];
     },
-    eliminarPersona(id) {
-      this.personas = this.personas.filter((persona) => persona.id !== id);
+    async agregarPersona(persona) {
+      try {
+        const response = await fetch(
+          "https://my-json-server.typicode.com/rmarabini/people/personas/",
+          {
+            method: "POST",
+            body: JSON.stringify(persona),
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+          }
+        );
+        const personaCreada = await response.json();
+        this.personas = [...this.personas, personaCreada];
+      } catch (error) {
+        console.error(error);
+      }
     },
-    actualizarPersona(id, personaActualizada) {
-      this.personas = this.personas.map((persona) =>
-        persona.id === id ? personaActualizada : persona
-      );
+    async eliminarPersona(persona_id) {
+      try {
+        await fetch(
+          "https://my-json-server.typicode.com/rmarabini/people/personas/" +
+            persona_id +
+            "/",
+          {
+            method: "DELETE",
+          }
+        );
+        this.personas = this.personas.filter((u) => u.id !== persona_id);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async actualizarPersona(id, personaActualizada) {
+      try {
+        const response = await fetch(
+          "https://my-json-server.typicode.com/rmarabini/people/personas/" +
+            personaActualizada.id +
+            "/",
+          {
+            method: "PUT",
+            body: JSON.stringify(personaActualizada),
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+          }
+        );
+        const personaActualizadaJS = await response.json();
+        this.personas = this.personas.map((u) =>
+          u.id === personaActualizada.id ? personaActualizadaJS : u
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    mounted() {
+      this.listadoPersonas();
     },
   },
 };
