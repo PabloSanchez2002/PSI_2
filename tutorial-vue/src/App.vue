@@ -37,7 +37,7 @@ export default {
     async listadoPersonas() {
       try {
         const response = await fetch(
-          "https://my-json-server.typicode.com/ rmarabini/people/personas/"
+          "https://psiapirest.onrender.com/api/v1/personas/"
         );
         this.personas = await response.json();
       } catch (error) {
@@ -47,7 +47,7 @@ export default {
     async agregarPersona(persona) {
       try {
         const response = await fetch(
-          "https://my-json-server.typicode.com/rmarabini/people/personas/",
+          "https://psiapirest.onrender.com/api/v1/personas/",
           {
             method: "POST",
             body: JSON.stringify(persona),
@@ -63,7 +63,7 @@ export default {
     async eliminarPersona(persona_id) {
       try {
         await fetch(
-          "https://my-json-server.typicode.com/rmarabini/people/personas/" +
+          "https://psiapirest.onrender.com/api/v1/personas/" +
             persona_id +
             "/",
           {
@@ -78,7 +78,7 @@ export default {
     async actualizarPersona(id, personaActualizada) {
       try {
         const response = await fetch(
-          "https://my-json-server.typicode.com/rmarabini/people/personas/" +
+          "https://psiapirest.onrender.com/api/v1/personas/" +
             personaActualizada.id +
             "/",
           {
