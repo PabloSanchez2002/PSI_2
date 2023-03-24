@@ -13,6 +13,10 @@ import os
 
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,7 +33,9 @@ SECRET_KEY = 'django-insecure-rpny+ths*337yn)a!clsfgoc*p3bqw0m1ndn_z!0hfa=$2z7*l
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    '127.0.0.1',
     'psiapirest.onrender.com',
+    '*',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -95,6 +101,23 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+if 'TESTING' in os.environ:
+    DATABASES['default']
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('NEON_DATABASE_NAME'),
+            'USER': os.environ.get('NEON_USER'),
+            'PASSWORD': os.environ.get('PASSWORD_NEON'),
+            'HOST': os.environ.get('NEON_DB'),
+            'PORT': os.environ.get('NEON_PORT'),
+        },
+        'OPTIONS': {
+            'options': '-c statement_timeout=5000',
+        }
+    }
 
 
 # Password validation

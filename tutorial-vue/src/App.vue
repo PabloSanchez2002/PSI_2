@@ -22,6 +22,9 @@
 <script>
 import TablaPersonas from "@/components/TablaPersonas.vue";
 import FormularioPersona from "@/components/FormularioPersona.vue"; // <<<<<<
+
+const rest = import.meta.env.VITE_DJANGOURL;
+
 export default {
   name: "app",
   components: {
@@ -37,7 +40,7 @@ export default {
     async listadoPersonas() {
       try {
         const response = await fetch(
-          "https://psiapirest.onrender.com/api/v1/personas/"
+          import.meta.env.VITE_DJANGOURL + '/api/v1/personas/'
         );
         this.personas = await response.json();
       } catch (error) {
@@ -47,7 +50,7 @@ export default {
     async agregarPersona(persona) {
       try {
         const response = await fetch(
-          "https://psiapirest.onrender.com/api/v1/personas/",
+          import.meta.env.VITE_DJANGOURL + '/api/v1/personas/',
           {
             method: "POST",
             body: JSON.stringify(persona),
@@ -63,7 +66,7 @@ export default {
     async eliminarPersona(persona_id) {
       try {
         await fetch(
-          "https://psiapirest.onrender.com/api/v1/personas/" +
+          import.meta.env.VITE_DJANGOURL + '/api/v1/personas/' +
             persona_id +
             "/",
           {
@@ -78,7 +81,7 @@ export default {
     async actualizarPersona(id, personaActualizada) {
       try {
         const response = await fetch(
-          "https://psiapirest.onrender.com/api/v1/personas/" +
+          import.meta.env.VITE_DJANGOURL + '/api/v1/personas/' +
             personaActualizada.id +
             "/",
           {
@@ -95,9 +98,9 @@ export default {
         console.error(error);
       }
     },
-    mounted() {
-      this.listadoPersonas();
-    },
+  },
+  mounted() {
+    this.listadoPersonas();
   },
 };
 </script>
